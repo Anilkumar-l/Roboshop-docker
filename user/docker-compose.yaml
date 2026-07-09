@@ -9,6 +9,8 @@ services:
      build: ./mongodb
      image: anilkumarops/mongodb:1.0.0
      container_name: mongodb
+     volumes:
+     - /:/data/db
    frontend:
      build: ./frontend
      image: anilkumarops/frontend:1.0.0
@@ -62,6 +64,8 @@ services:
        RABBITMQ_DEFAULT_USER: roboshop
        RABBITMQ_DEFAULT_PASS: roboshop123
       container_name: rabbitmq
+      volumes:
+      - rabbitmq:/var/lib/rabbitmq
    shipping:
       build: ./shipping
       image: anilkumarops/shipping:1.0.0
@@ -73,6 +77,8 @@ services:
      build: ./mysql
      image: anilkumarops/mysql:1.0.0
      container_name: mysql
+     volumes:
+     - mysql:/var/lib/mysql
 networks:
    default:
       driver: bridge
