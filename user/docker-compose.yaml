@@ -70,12 +70,12 @@ services:
       - cart
    mysql:
      build: ./mysql
-     image: anilkumarops/mysql:q.0.0
+     image: anilkumarops/mysql:1.0.0
      container_name: mysql
-   networks:
-    - default:
-        driver: bridge
-        name: roboshop
-        external: false # if true, you need to create network manually   
+networks:
+   default:
+      driver: bridge
+      name: roboshop
+      external: false # if true, you need to create network manually   
 
 
