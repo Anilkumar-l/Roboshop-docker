@@ -73,9 +73,9 @@ services:
      image: anilkumarops/mysql:q.0.0
      container_name: mysql
    networks:
-    default:
-     driver: bridge
-     name: roboshop
-     external: false # if true, you need to create network manually   
+    - default:
+        driver: bridge
+        name: roboshop
+        external: false # if true, you need to create network manually   
 
 
