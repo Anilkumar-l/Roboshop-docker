@@ -44,13 +44,13 @@ services:
       image: anilkumarops/payment:1.0.0
       container_name: payment
       environment:
-      CART_HOST: "cart"
-      CART_PORT: "8080"
-      USER_HOST: "user"
-      USER_PORT: "8080"
-      AMQP_HOST: "rabbitmq"
-      AMQP_USER: "roboshop"
-      AMQP_PASS: "roboshop123"
+       CART_HOST: "cart"
+       CART_PORT: "8080"
+       USER_HOST: "user"
+       USER_PORT: "8080"
+       AMQP_HOST: "rabbitmq"
+       AMQP_USER: "roboshop"
+       AMQP_PASS: "roboshop123"
       depends_on:
       - rabbitmq
       - cart
@@ -58,8 +58,8 @@ services:
    rabbitmq:
       image: rabbitmq:3
       environment: 
-      RABBITMQ_DEFAULT_USER: roboshop
-      RABBITMQ_DEFAULT_PASS: roboshop123
+       RABBITMQ_DEFAULT_USER: roboshop
+       RABBITMQ_DEFAULT_PASS: roboshop123
       container_name: rabbitmq
    shipping:
       build: ./shipping
