@@ -56,8 +56,7 @@ services:
       - cart
       - user
    rabbitmq:
-      build: ./rabbitmq
-      image: anilkumarops/rabbitmq:1.0.0
+      image: rabbitmq:3
       environment: 
       RABBITMQ_DEFAULT_USER: roboshop
       RABBITMQ_DEFAULT_PASS: roboshop123
