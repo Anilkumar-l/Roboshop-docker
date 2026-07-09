@@ -1,0 +1,82 @@
+services:
+   catalogue:
+     build: ./catalogue
+     image: anilkumarops/catalogue:1.0.0
+     container_name: catalogue
+     depends_on:
+     - mongodb
+   mongodb:
+     build: ./mongodb
+     image: anilkumarops/mongodb:1.0.0
+     container_name: mongodb
+   frontend:
+     build: ./frontend
+     image: anilkumarops/frontend:1.0.0
+     container_name: frontend
+     ports:
+     - "80:80"
+     depends_on:
+     - catalogue
+     - cart
+     - user
+     - payment
+
+   redis:
+     build: ./redis
+     image: anilkumarops/redis:1.0.0
+     container_name: redis
+   user:
+     build: ./user
+     image: anilkumarops/user:1.0.0
+     container_name: user
+     depends_on:
+     - redis
+     - mongodb
+   cart:
+     build: ./cart
+     image: anilkumarops/cart:1.0.0
+     container_name: cart
+     depends_on:
+     - redis
+     - catalogue
+   payment:
+      build: ./payment
+      image: anilkumarops/payment:1.0.0
+      container_name: payment
+      environment:
+      CART_HOST: "cart"
+      CART_PORT: "8080"
+      USER_HOST: "user"
+      USER_PORT: "8080"
+      AMQP_HOST: "rabbitmq"
+      AMQP_USER: "roboshop"
+      AMQP_PASS: "roboshop123"
+      depends_on:
+      - rabbitmq
+      - cart
+      - user
+   rabbitmq:
+      build: ./rabbitmq
+      image: anilkumarops/rabbitmq:1.0.0
+      environment: 
+      RABBITMQ_DEFAULT_USER: roboshop
+      RABBITMQ_DEFAULT_PASS: roboshop123
+      container_name: rabbitmq
+   shipping:
+      build: ./shipping
+      image: anilkumarops/shipping:1.0.0
+      container_name: shipping
+      depends_on:
+      - mysql
+      - cart
+   mysql:
+     build: ./mysql
+     image: anilkumarops/mysql:q.0.0
+     container_name: mysql
+   networks:
+     default:
+      driver: bridge
+      name: roboshop
+      external: false # if true, you need to create network manually   
+
+
