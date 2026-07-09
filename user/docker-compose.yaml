@@ -20,6 +20,7 @@ services:
      - cart
      - user
      - payment
+     - shipping
 
    redis:
      build: ./redis
